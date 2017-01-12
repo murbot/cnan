@@ -1,0 +1,38 @@
+.main {
+	width: 60%;
+	float: left;
+}
+
+.title {
+    display: inline-block;
+}
+
+.breadcrumbs {
+    float: right;
+    margin-right: 70px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.subtitle {
+	color: #EE1209;
+}
+
+.phoneNumber, .email {
+	color: blue;
+	font-weight: 600;
+}
+
+.aditional {
+	float: right;
+	background-color: #F8F6F6;
+	margin-right: 15%;
+}
+
+.aditional .video {
+	width: 150px;
+	height: 150px;
+	background-color: #EE1209;
+	margin-left: auto;
+	margin-right: auto;
+}
