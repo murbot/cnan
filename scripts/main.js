@@ -12,11 +12,20 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/certified_warranty', {
         templateUrl : './views/certified_warranty.html'
     })
+    .when('/certified_warranty_claims', {
+        templateUrl : './views/certified_warranty_claims.html'
+    })
     .when('/contract_remittance', {
         templateUrl : './views/contract_remittance.html'
     })
+    .when('/dealer_dashboard', {
+        templateUrl : './views/dealer_dashboard.html'
+    })
     .when('/e_contracting_sign_up', {
         templateUrl : './views/e_contracting_sign_up.html'
+    })
+    .when('/gap_claims', {
+        templateUrl : './views/gap_claims.html'
     })
     .when('/guaranteed_asset_protection_(gap)', {
         templateUrl : './views/guaranteed_asset_protection_(gap).html'
@@ -26,6 +35,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     })
     .when('/lifetime_limited_powertrain_warranty_wrap', {
         templateUrl : './views/lifetime_limited_powertrain_warranty_wrap.html'
+    })
+    .when('/lifetime_limited_powertrain_warranty_wrap_claims', {
+        templateUrl : './views/lifetime_limited_powertrain_warranty_wrap_claims.html'
     })
     .when('/manuals_procedures', {
         templateUrl : './views/manuals_procedures.html'
@@ -69,37 +81,45 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/tire_wheel', {
         templateUrl : './views/tire_wheel.html'
     })
+    .when('/tire_wheel_claims', {
+        templateUrl : './views/tire_wheel_claims.html'
+    })
     .when('/training_schedules', {
         templateUrl : './views/training_schedules.html'
+    })
+    .when('/vehicle_service_contracts', {
+        templateUrl : './views/vehicle_service_contracts.html'
+    })
+    .when('/vsc_claims', {
+        templateUrl : './views/vsc_claims.html'
     });
 }]);
 
 app.controller('MainControl', ['$scope', function($scope){
     
     $scope.titles = [
-    "Dealer Dashboard",
     "Sell Contracts", 
     "Manage Contracts",
     "Reporting & Remitance",
+    "Claims",
     "Our Products", 
     "Marketing & Communications",
     "Help"];
 
     $scope.subOptions = [
-        [],
         ["Quote a Vehicle","Rate a Vehicle", "Program Resources"],
         ["Search & Verify Coverage", "Cancel a Contract", "Lienholder Administration", "Procedure Manuals"],
         ["Reports", "Contract Remittance", "e-contracting Sign-up"],
-        ["POPP/SPP", "Guaranteed Asset Protection (GAP)", "Tire & Wheel", "Certified Warranty", "Lifetime Limited Powertrain Warranty & Wrap"],
+        ["VSC Claims", "GAP Claims", "Tire & Wheel Claims", "Certified Warranty Claims", "Lifetime Limited Powertrain Warranty & Wrap Claims"],
+        ["Vehicle Service Contracts", "POPP/SPP", "Guaranteed Asset Protection (GAP)", "Tire & Wheel", "Certified Warranty", "Lifetime Limited Powertrain Warranty & Wrap"],
         ["News","Marketing Resourses","Training & Schedules","Order Supplies"],
         ["Support","Manuals & Procedures"]
     ];
 
     $scope.menuOptions = [ //add icons
-        { 
-            title: "",
-            submenu : [],
-            key: false
+        { title: "",
+          submenu : [],
+          key: false
         },
         { title: "",
           submenu : [],

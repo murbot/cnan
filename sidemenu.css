@@ -1,3 +1,9 @@
+.arrow-img{
+    float: right;
+    height: 15px;
+    width: 15px;
+}
+
 .navbar{
     background-color: #F8F6F6;
     bottom: 0;
@@ -10,23 +16,29 @@
     width: 32%;
 }
 
+.menu__title1{
+    color: #333333;
+    text-decoration: none;
+}
+
+.sidelist__menu{}
+
+.sidelist__menu--selected{
+    background-color: red;
+}
 
 .sidelist {
-    list-style-type: none;
     float: right;
+    list-style-type: none;
 }
 
 .sidelist__submenu {
-    list-style-type: none;
     color: #333333;
+    list-style-type: none;
 }
 
 .menu__link {
     color: #333333;
-    font-size: 12px;
+    font-size: 10px;
     text-decoration: none;
-}
-
-.menu__title--selected {
-    background-color: : grey;
 }
