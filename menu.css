@@ -1,0 +1,116 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+}
+
+.brand {
+    display: inline-block;
+    height: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 37%;
+    margin-left: 13%;
+}
+
+.brand img {
+    height: 50px;
+    width: 250px;
+    border-right: 1px solid red;
+    padding-right: 5px;
+    
+}
+
+.container {
+    float: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.viewcontainer {
+    width: 68%;    
+    float: left;
+}
+
+.portal {
+    margin-left: 5%;
+}
+
+.menu {
+    display: inline-block;
+    width: 48%;
+}
+.menu-search {
+    display: inline-block;
+}
+
+.menu-nav {
+    display: inline-block;
+    width: 40%;
+}
+
+.menu-nav span {
+    margin-left: 3%;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-dealership {
+    display: inline-block; 
+    margin-right: 13%;
+}
+
+.topMenu {
+    background-color: #333333;
+    color: white;
+    width: 100%;    
+}
+
+.search-input {
+    background-color: #3d3f42;
+    border-color: #3d3f42;
+    height: 21px;
+    width: 200px;
+}
+
+.footer {
+    background-color: #333333;
+    color: #606368;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    clear: both;
+
+}
+
+.footer span a {
+    display: inline-block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #F8F6F6;
+    text-decoration: none;
+    margin-left: 2em;
+    
+}
+
+.footer p {   
+    text-align: right;
+    float: right;
+    margin-right: 3em;
+}
+

@@ -1,0 +1,32 @@
+.navbar{
+    background-color: #F8F6F6;
+    bottom: 0;
+    color: #333333;
+    float: left;
+    font-size: 15px;    
+    font-weight: bold;
+    min-height: 100%;
+    top: 0;
+    width: 32%;
+}
+
+
+.sidelist {
+    list-style-type: none;
+    float: right;
+}
+
+.sidelist__submenu {
+    list-style-type: none;
+    color: #333333;
+}
+
+.menu__link {
+    color: #333333;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.menu__title--selected {
+    
+}

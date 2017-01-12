@@ -1,0 +1,36 @@
+body {
+	margin-left: 33%;
+}
+
+.view-breadcrumbs {
+    border-width: 0px;
+    color: #666666;
+    font-size: 14px;
+    height: 17px;
+    left: 967px;
+    text-align: right;
+    top: 74px;
+    width: 219px;
+    float: right;
+}
+
+.view-title {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: rgba(255, 255, 255, 0);
+    background: inherit;
+    border-radius: 0px;
+    border-width: 0px;
+    border: none;
+    box-shadow: none;
+    color: #333333;
+    display: inline-block;
+    font-family: 'Arial Bold', 'Arial';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    height: 22px;
+    left: 0px;
+    top: 0px;
+    width: 154px;
+}

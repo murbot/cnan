@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="menu.css">
+        <link rel="stylesheet" type="text/css" href="sidemenu.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-route.min.js></script>
+    </head>
+    <body ng-app="app">
+        <div class="topMenu">
+            <div class="brand">
+                <img src="./img/logo-cna-national.png">
+                <span class="portal">DEALER PORTAL</span>
+            </div>
+            <div class="menu">        
+                <form class="menu-search">            
+                    <input class="search-input" type="text" name="search" placeholder="SEARCH">
+                </form>                
+                <div class="menu-nav">
+                    <span><a href="#">CONTACT US</a></span>
+                    <span><a href="#/support">HELP</a></span>
+                    <span><a href="#">FEEDBACK</a></span>
+                </div>
+                <div class="menu-dealership">
+                    <span>DealershipName</span>            
+                </div>
+            </div>
+        </div>
+        
+        <div class=container>
+            <nav class="navbar">
+                <ul class="sidelist" ng-controller="MainControl">           
+                    <li class="sidelist__menu" ng-repeat="option in menuOptions">
+                        <label class="menu__title" ng-click="showOptions(option)">{{ option.title }}</label>
+                        <div ng-show="option.key">
+                            <ul>
+                                <li class="sidelist__submenu" ng-repeat="subOption in option.submenu"><a class="menu__link" href="#/{{ subOption.link }}">{{ subOption.title }}</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="viewcontainer" ng-view></div>
+        </div>
+        <footer class="footer">
+            <span><a href="#">GO TO CNAN WEBSITE</a></span>
+            <span><a href="#">FEEDBACK</a></span>
+            <span><a href="#">PRIVACY POLICY</a></span>
+            <span><a href="#">DISCLAIMER</a></span>
+            <p>Copyright 2007 asdasdasdasdasdasdasdasdasdasdas</p>
+        </footer>
+        <script type="text/javascript" src="scripts/main.js"></script>
+    </body>
+</html>
