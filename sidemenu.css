@@ -29,4 +29,5 @@
 
 .menu__title--selected {
     background-color: : grey;
+    font-size: 12px;
 }
