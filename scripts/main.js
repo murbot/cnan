@@ -15,6 +15,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/certified_warranty_claims', {
         templateUrl : './views/certified_warranty_claims.html'
     })
+    .when('/contact_us', {
+        templateUrl : './views/contact_us.html'
+    })
     .when('/contract_remittance', {
         templateUrl : './views/contract_remittance.html'
     })
