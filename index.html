@@ -39,12 +39,12 @@
                     <li class="sidelist__menu">
                         <a class="menu__title1" href="#/dealer_dashboard">Dealer Dashboard</a>
                     </li>       
-                    <li class="sidelist__menu" ng-repeat="option in menuOptions" ng-click="showOptions(option)" ng-class="option.key ? 'sidelist__menu--selected' : 'sidelist__menu'">
-                        <label class="menu__title" >
+                    <li class="sidelist__menu" ng-repeat="option in menuOptions" >
+                        <div class="menu__title" ng-click="showOptions(option)" ng-class="option.key ? 'sidelist__menu--selected' : 'sidelist__menu'">
                             {{ option.title }}
                             <img class="arrow-img" src="src/img/dropdownarrow.png" ng-show="option.key">
                             <img class="arrow-img" src="src/img/droprightarrow.png" ng-show="!option.key">
-                        </label>
+                        </div>
                         <div ng-show="option.key">
                             <ul>
                                 <li class="sidelist__submenu" ng-repeat="subOption in option.submenu"><a class="menu__link" href="#/{{ subOption.link }}">{{ subOption.title }}</a></li>
