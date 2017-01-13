@@ -21,7 +21,10 @@
     text-decoration: none;
 }
 
-.sidelist__menu{}
+.sidelist__menu{
+    width:100%;
+    display: block;
+}
 
 .sidelist__menu--selected{
     background-color: red;
@@ -30,6 +33,7 @@
 .sidelist {
     float: right;
     list-style-type: none;
+    width: 100%;
 }
 
 .sidelist__submenu {
