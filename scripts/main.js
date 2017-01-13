@@ -95,9 +95,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-app.controller('MainControl', ['$scope', function($scope){
+app.controller('mainControl', ['$scope', function($scope){
     
     $scope.titles = [
+    "Dealer Dashboard",
     "Sell Contracts", 
     "Manage Contracts",
     "Reporting & Remitance",
@@ -107,6 +108,7 @@ app.controller('MainControl', ['$scope', function($scope){
     "Help"];
 
     $scope.subOptions = [
+        [],
         ["Quote a Vehicle","Rate a Vehicle", "Program Resources"],
         ["Search & Verify Coverage", "Cancel a Contract", "Lienholder Administration", "Procedure Manuals"],
         ["Reports", "Contract Remittance", "e-contracting Sign-up"],
@@ -117,6 +119,10 @@ app.controller('MainControl', ['$scope', function($scope){
     ];
 
     $scope.menuOptions = [ //add icons
+        { title: "",
+          submenu : [],
+          key: false
+        },
         { title: "",
           submenu : [],
           key: false
@@ -163,6 +169,14 @@ app.controller('MainControl', ['$scope', function($scope){
         }
     }
 
+    /*$scope.showDashBoard = function () {
+        
+        for (let i = 0; i < $scope.menuOptions.length; i++){
+            
+                $scope.menuOptions[i].key = false;
+            }
+    }*/
+
     $scope.showOptions = function (selected) {
        
         selected.key = !selected.key;
@@ -174,4 +188,13 @@ app.controller('MainControl', ['$scope', function($scope){
         }
     }
 
+    $scope.highlight = function (subtitle) {
+
+
+        let el = document.querySelector('#'+subtitle);
+        if (document.querySelector('.highlight')) {
+            document.querySelector('.highlight').classList.remove('highlight');
+        }
+        el.classList.add('highlight');
+    }
 }]);
