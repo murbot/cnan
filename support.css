@@ -72,7 +72,8 @@ body {
 .aditional {
     float: right;
     background-color: #F8F6F6;
-    margin-right: 15%;
+    margin-right: 10%;
+    margin-left: 10%;
 }
 
 .aditional .video {
