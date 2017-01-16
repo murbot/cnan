@@ -100,6 +100,8 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 app.controller('mainControl', ['$scope', function($scope){
     
+    $scope.toggle = false;
+
     $scope.titles = [
     "Dealer Dashboard",
     "Sell Contracts", 
@@ -172,6 +174,12 @@ app.controller('mainControl', ['$scope', function($scope){
         }
     }
 
+    $scope.showMenu = function () {
+
+        $scope.toggle=!$scope.toggle;
+        console.log($scope.toggle);
+    }
+
     /*$scope.showDashBoard = function () {
         
         for (let i = 0; i < $scope.menuOptions.length; i++){
@@ -180,9 +188,23 @@ app.controller('mainControl', ['$scope', function($scope){
             }
     }*/
 
+    $scope.closeMobile = function () {
+
+
+        for (let i = 0; i < $scope.menuOptions.length; i++){
+            
+                $scope.menuOptions[i].key = false;
+            }
+
+        $scope.toggle=!$scope.toggle;
+        //document.querySelector('.sidelist__mobile').classList.remove('sidelist__mobile--show');
+        //document.querySelector('.sidelist__mobile').classList.add('sidelist__mobile--hidden');
+    }
+
     $scope.showOptions = function (selected) {
        
         selected.key = !selected.key;
+
         for (let i = 0; i < $scope.menuOptions.length; i++){
             
             if ($scope.menuOptions[i].title != selected.title) {
