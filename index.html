@@ -33,9 +33,9 @@
             </div>
         </div>
         
-        <div class=container ng-controller="mainControl">
+        <div class=container>
             <!--DESKTOP MENU-->
-            <nav class="navbar">
+            <nav class="navbar" ng-controller="navControl">
                 <ul class="sidelist" >    
                     <!--<li class="sidelist__menu" ng-click="showDashBoard()" >
                         <a class="menu__title1" href="#/dealer_dashboard">Dealer Dashboard</a>
@@ -59,7 +59,7 @@
                 </ul>
             </nav>
             <!--MOBILE MENU-->
-            <nav class="navbar--mobile">
+            <nav class="navbar--mobile" ng-controller="navControl">
             <img class="hamburguer--img" src="src/img/menu-icon.png" ng-click="showMenu()">
                 <ul class="sidelist" ng-show="toggle">    
                     <!--<li class="sidelist__menu" ng-click="showDashBoard()" >
@@ -94,5 +94,6 @@
             <p>Copyright 2007 asdasdasdasdasdasdasdasdasdasdas</p>
         </footer>
         <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/navController.js"></script>
     </body>
 </html>
