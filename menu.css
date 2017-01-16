@@ -37,6 +37,7 @@ body {
     float: left;
     width: 100%;
     display: inline-block;
+    min-height: 100%;
 }
 
 .viewcontainer {
@@ -89,7 +90,7 @@ body {
 }
 
 .footer {
-    background-color: #333333;
+    background-color: #33333;
     color: #606368;
     width: 100%;
     bottom: 0;
