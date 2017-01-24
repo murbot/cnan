@@ -1,0 +1,271 @@
+FORMAT: 1A9
+HOST: http://api.cnanational.com/v1
+
+# Gap Claim Web Services API
+
+GAP Claims have increased over time without any improvements to the systems and processes, 
+increasing call wait times as well as how long it takes to process a waiver. This prompted 
+a Business Process Review, identifying several changes to address issues impacting customer 
+service.
+
+This document defines all the web services contracts related Gap Claim app.
+
+## User Profile [/profile/{profileId}]
+This service returns the user profile data. Se service is going to use the security token 
+the get the current user profile.
+
+The main use for this service to identify the role of the current user on the first page. 
+If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
+the user to the gap claim list.
+
++ Parameters
+
+    + profileId (required, number, `356`) ... Profile ID.
+
+### Retrieve a User Profile [GET]
++ Request (application/json)
+
+    + Header
+    
+            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Cache-Control: no-cache
+
++ Response 200 (application/json)
+
+    + Attributes (profile)
+    
+    + Body
+    
+            {
+                "id": 20575, 
+                "role": "dealer", 
+                "name": "Motor Inn Company"
+            }
+            
++ Response 500 (application/json)
+
+    + Attributes (error)
+
+## Dealer Profile [/agents/{agentId}/dealers]
+This service returns a collection of dealer profiles. Se service is going to use
+the security token the get the current user profile and identify if it is an agent.
+If the current user profile is a dealer, the service is going to return an empty array.
+
+The main use for this service to fill the dropdown control of the first page. If the
+current user is an agent, this ervice is going to provide us all the data to fill
+the control and make the agend acts as a dealer.
+
++ Parameters
+
+    + agentId (required, number, `365`) ... Profile ID of the agent. 
+
+### Retrieve a Dealers Profile collection [GET]
++ Request (application/json)
+
+    + Header
+    
+            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+
++ Response 200 (application/json)
+
+    + Attributes (array[profile]) 
+    
+    + Body
+    
+            [
+                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
+                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
+                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
+                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
+                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"}
+            ]
+            
++ Response 500 (application/json)
+
+    + Attributes (error)
+
+## Dealer Gap Claim [/claims/agent/{agentId}{?status}]
+Return the collection of gap claims of an specific dealer. If the status parameter is
+empty, the service is going to return an empty array.
+
+The main use for this service is on the second page, to retive the collection of gap claim 
+for an specific dealer. The idea is to make 2 different request to this service. The first 
+one is to get all the gap claims with status "P". The second request is to get all the gap
+claims with status "O|A|B|C|D|V" ("C" and "D" status fall off after 90 days from this
+list).
+
++ Parameters
+
+    + agentId (required, number, `356`) ... Agent ID of the gap claims to retrieve. 
+    + status (required, string, `P|B|A`) ... Claim status IDs of the gap claims to retrive, separated by pipe.
+
+### Retrieve a Dealer Gap Claim collection [GET]
++ Request (application/json)
+
+    + Header
+    
+            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+
++ Response 200 (application/json)
+
+    + Attributes (array[claim])
+    
+    + Body
+    
+            [
+                {
+                    "claimNum": "6359654", 
+                    "addendumNum": "2245568",
+                    "customer": "Smith",
+                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
+                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
+                    "status": "P",
+                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+                },
+                {
+                    "claimNum": "6359654", 
+                    "addendumNum": "2245568",
+                    "customer": "Smith",
+                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
+                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
+                    "status": "P",
+                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+                },
+                {
+                    "claimNum": "6359654", 
+                    "addendumNum": "2245568",
+                    "customer": "Smith",
+                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
+                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
+                    "status": "P",
+                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+                }
+            ]
+
++ Response 500 (application/json)
+
+    + Attributes (error)
+    
+
+## Gap Claim [/claims/{claimId}]
+Return a single gap claim object with all the associated documents.
+
+The main use for this service is on the page where we have to show the deatils
+of an specific gap claim.
+
++ Parameters
+
+    + claimId (required, number, `6359654`) ... Integer `claimId` of the gap claim to perform action with. Has example value.
+
+### Retrieve a Gap Claim [GET]
++ Request (application/json)
+
+    + Header
+    
+            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            
++ Response 200 (application/json)
+
+    + Attributes
+        + claimData (claim)
+        + requiredDocs (array[document])
+        + additionalDocs (array[document])
+        
+    + Body
+    
+            {
+                "claimData": {
+                        "claimNum": "6359654", 
+                        "addendumNum": "2245568",
+                        "customer": "Smith",
+                        "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
+                        "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
+                        "status": "P",
+                        "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+                },
+                "requiredDocs": [
+                    {"id": 1, "name": "Police Report", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}},
+                    {"id": 2, "name": "Lender Payment History", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 16}},
+                    {"id": 3, "name": "Finance Contract", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 17}}
+                ],
+                "additionalDocs": [
+                    {"id": 4, "name": "Sales/Leasing Aggrement", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}},
+                    {"id": 5, "name": "Factory Invoice", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 16}},
+                    {"id": 6, "name": "Other Credits", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 17}}
+                ]
+            }
+
++ Response 500 (application/json)
+
+    + Attributes (error)
+
+
+## Gap Claim Status Types [/claims/status-types]
+Return a collection of the different gap claim status types.
+
+The main use for this service to fill the legend on the page where we have
+to list all the gap claims for a dealer.
+
+
+### Retrieve the Gap Claim Status collection [GET]
++ Request (application/json)
+
+    + Header
+    
+            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+
++ Response 200 (application/json)
+
+    + Attributes (array)
+        + (object)
+            + id: P (string) - Document ID
+            + name: Pending Documents (string) - Document name
+            + description: Documents still needed in order to process the claim (string) - Document description
+            
+    + Body
+    
+            [
+                {"id": "P", "name": "Pending Documents", "description": "Documents still needed in order to process the claim"},
+                {"id": "O", "name": "In Process", "description": "All documents received. Claim under Review"},
+                {"id": "A", "name": "In Process", "description": "All documents received. Claim under Review"},
+                {"id": "B", "name": "In Process", "description": "All documents received. Claim under Review"},
+                {"id": "C", "name": "Closed", "description": ""},
+                {"id": "D", "name": "Denied", "description": ""},
+                {"id": "V", "name": "Void", "description": ""}
+            ]
+
++ Response 500 (application/json)
+
+    + Attributes (error)
+    
+
+# Data Structures
+
+## date (object)
++ year (number) - Year fo the date
++ month (number) - Month of the date
++ day (number) - Day of the date
+
+## profile (object)
++ id: 365 (number, required) - Profile Id
++ role: agent (string, required) - Profile role
++ name: Motor Inn Company (string, required) - Profile name
+
+## document (object)
++ id (number) - Document ID
++ name (string) - Document name
++ verifiedDate (date) - Document verification date
+
+## claim (object)
++ claimNum: 6359654 (string) - Claim number
++ addendumNum: 2245568 (string) - Addendum number
++ customer: Smith (string) - Customer
++ dateLoss (date) - Date of loss
++ dateClaimOpened (date) - Date claim opened
++ status: P (string) - Claim status
++ statusName: Pending Documents (string) - Claim status name
++ statusDesc: Documents still needed in order to process the claim (string) - Claim status description
++ lastActivityDate (date) - Last activity date
+
+## error (object)
++ message: Error message (string, required) - Error message to show to the final user
