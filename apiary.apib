@@ -10,9 +10,9 @@ service.
 
 This document defines all the web services contracts related Gap Claim app.
 
-# Group Profiles
+## Group Profiles
 
-## User Profile [/profile/{profileId}]
+### User Profile [/profile/{profileId}]
 This service returns the user profile data. Se service is going to use the security token 
 the get the current user profile.
 
@@ -24,7 +24,7 @@ the user to the gap claim list.
 
     + profileId (required, number, `356`) ... Profile ID.
 
-### Retrieve a User Profile [GET]
+#### Retrieve a User Profile [GET]
 + Request (application/json)
 
     + Header
@@ -48,7 +48,7 @@ the user to the gap claim list.
 
     + Attributes (error)
 
-## Dealer Profile [/agent/{agentId}/dealers]
+### Dealer Profile [/agent/{agentId}/dealers]
 This service returns a collection of dealer profiles. Se service is going to use
 the security token the get the current user profile and identify if it is an agent.
 If the current user profile is a dealer, the service is going to return an empty array.
@@ -61,7 +61,7 @@ the control and make the agend acts as a dealer.
 
     + agentId (required, number, `365`) ... Profile ID of the agent. 
 
-### Retrieve a Dealers Profile collection [GET]
+#### Retrieve a Dealers Profile collection [GET]
 + Request (application/json)
 
     + Header
@@ -86,9 +86,9 @@ the control and make the agend acts as a dealer.
 
     + Attributes (error)
     
-# Group Claims
+## Group Claims
 
-## Dealer Gap Claim [/claims/agent/{agentId}{?status}]
+### Dealer Gap Claim [/claims/agent/{agentId}{?status}]
 Return the collection of gap claims of an specific dealer. If the status parameter is
 empty, the service is going to return an empty array.
 
@@ -103,7 +103,7 @@ list).
     + agentId (required, number, `356`) ... Agent ID of the gap claims to retrieve. 
     + status (required, string, `P|B|A`) ... Claim status IDs of the gap claims to retrive, separated by pipe.
 
-### Retrieve a Dealer Gap Claim collection [GET]
+#### Retrieve a Dealer Gap Claim collection [GET]
 + Request (application/json)
 
     + Header
@@ -151,7 +151,7 @@ list).
     + Attributes (error)
     
 
-## Gap Claim [/claim/{claimId}]
+### Gap Claim [/claim/{claimId}]
 Return a single gap claim object with all the associated documents.
 
 The main use for this service is on the page where we have to show the deatils
@@ -161,7 +161,7 @@ of an specific gap claim.
 
     + claimId (required, number, `6359654`) ... Integer `claimId` of the gap claim to perform action with. Has example value.
 
-### Retrieve a Gap Claim [GET]
+#### Retrieve a Gap Claim [GET]
 + Request (application/json)
 
     + Header
@@ -204,14 +204,14 @@ of an specific gap claim.
     + Attributes (error)
 
 
-## Gap Claim Status Types [/claims/status-types]
+### Gap Claim Status Types [/claims/status-types]
 Return a collection of the different gap claim status types.
 
 The main use for this service to fill the legend on the page where we have
 to list all the gap claims for a dealer.
 
 
-### Retrieve the Gap Claim Status collection [GET]
+#### Retrieve the Gap Claim Status collection [GET]
 + Request (application/json)
 
     + Header
