@@ -57,6 +57,8 @@ The main use for this service to fill the dropdown control of the first page. If
 current user is an agent, this ervice is going to provide us all the data to fill
 the control and make the agend acts as a dealer.
 
+Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
+
 + Parameters
 
     + agentId (required, number, `365`) ... Profile ID of the agent. 
@@ -75,11 +77,56 @@ the control and make the agend acts as a dealer.
     + Body
     
             [
-                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
-                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
-                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
-                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"},
-                {"id": 20575, "role": "dealer", "name": "Motor Inn Company"}
+              {
+                "id": 22185,
+                "role": "dealer",
+                "name": "Rodemco"
+              },
+              {
+                "id": 27551,
+                "role": "dealer",
+                "name": "Pivitol"
+              },
+              {
+                "id": 21016,
+                "role": "dealer",
+                "name": "Softmicro"
+              },
+              {
+                "id": 28986,
+                "role": "dealer",
+                "name": "Zilidium"
+              },
+              {
+                "id": 24074,
+                "role": "dealer",
+                "name": "Avenetro"
+              },
+              {
+                "id": 27321,
+                "role": "dealer",
+                "name": "Kenegy"
+              },
+              {
+                "id": 28032,
+                "role": "dealer",
+                "name": "Diginetic"
+              },
+              {
+                "id": 29341,
+                "role": "dealer",
+                "name": "Melbacor"
+              },
+              {
+                "id": 24261,
+                "role": "dealer",
+                "name": "Envire"
+              },
+              {
+                "id": 28589,
+                "role": "dealer",
+                "name": "Microluxe"
+              }
             ]
             
 + Response 500 (application/json)
@@ -97,6 +144,8 @@ for an specific dealer. The idea is to make 2 different request to this service.
 one is to get all the gap claims with status "P". The second request is to get all the gap
 claims with status "O|A|B|C|D|V" ("C" and "D" status fall off after 90 days from this
 list).
+
+Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
 
 + Parameters
 
@@ -117,33 +166,216 @@ list).
     + Body
     
             [
-                {
-                    "claimNum": "6359654", 
-                    "addendumNum": "2245568",
-                    "customer": "Smith",
-                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
-                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
-                    "status": "P",
-                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+              {
+                "lastActivityDate": {
+                  "Day": 9,
+                  "Month": 5,
+                  "Year": 2017
                 },
-                {
-                    "claimNum": "6359654", 
-                    "addendumNum": "2245568",
-                    "customer": "Smith",
-                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
-                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
-                    "status": "P",
-                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
+                "status": "C",
+                "dateClaimOpened": {
+                  "Day": 26,
+                  "Month": 7,
+                  "Year": 2017
                 },
-                {
-                    "claimNum": "6359654", 
-                    "addendumNum": "2245568",
-                    "customer": "Smith",
-                    "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
-                    "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
-                    "status": "P",
-                    "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
-                }
+                "dateLoss": {
+                  "Day": 19,
+                  "Month": 9,
+                  "Year": 2016
+                },
+                "customer": "ENTALITY",
+                "addendumNum": 2450147,
+                "claimNum": 6030834
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 5,
+                  "Month": 11,
+                  "Year": 2017
+                },
+                "status": "D",
+                "dateClaimOpened": {
+                  "Day": 21,
+                  "Month": 6,
+                  "Year": 2016
+                },
+                "dateLoss": {
+                  "Day": 21,
+                  "Month": 6,
+                  "Year": 2016
+                },
+                "customer": "DRAGBOT",
+                "addendumNum": 2187357,
+                "claimNum": 6013696
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 28,
+                  "Month": 11,
+                  "Year": 2016
+                },
+                "status": "D",
+                "dateClaimOpened": {
+                  "Day": 19,
+                  "Month": 7,
+                  "Year": 2017
+                },
+                "dateLoss": {
+                  "Day": 14,
+                  "Month": 8,
+                  "Year": 2017
+                },
+                "customer": "SURETECH",
+                "addendumNum": 2778516,
+                "claimNum": 6883531
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 12,
+                  "Month": 4,
+                  "Year": 2017
+                },
+                "status": "C",
+                "dateClaimOpened": {
+                  "Day": 10,
+                  "Month": 5,
+                  "Year": 2016
+                },
+                "dateLoss": {
+                  "Day": 16,
+                  "Month": 6,
+                  "Year": 2016
+                },
+                "customer": "MINGA",
+                "addendumNum": 2405085,
+                "claimNum": 6832004
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 4,
+                  "Month": 2,
+                  "Year": 2016
+                },
+                "status": "V",
+                "dateClaimOpened": {
+                  "Day": 16,
+                  "Month": 3,
+                  "Year": 2016
+                },
+                "dateLoss": {
+                  "Day": 29,
+                  "Month": 1,
+                  "Year": 2016
+                },
+                "customer": "COMTEXT",
+                "addendumNum": 2077547,
+                "claimNum": 6301865
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 27,
+                  "Month": 1,
+                  "Year": 2017
+                },
+                "status": "A",
+                "dateClaimOpened": {
+                  "Day": 25,
+                  "Month": 12,
+                  "Year": 2017
+                },
+                "dateLoss": {
+                  "Day": 2,
+                  "Month": 5,
+                  "Year": 2016
+                },
+                "customer": "ISOTRONIC",
+                "addendumNum": 2887948,
+                "claimNum": 6407154
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 28,
+                  "Month": 8,
+                  "Year": 2016
+                },
+                "status": "C",
+                "dateClaimOpened": {
+                  "Day": 11,
+                  "Month": 11,
+                  "Year": 2016
+                },
+                "dateLoss": {
+                  "Day": 12,
+                  "Month": 5,
+                  "Year": 2016
+                },
+                "customer": "ZILLANET",
+                "addendumNum": 2424617,
+                "claimNum": 6850285
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 18,
+                  "Month": 10,
+                  "Year": 2017
+                },
+                "status": "D",
+                "dateClaimOpened": {
+                  "Day": 5,
+                  "Month": 8,
+                  "Year": 2017
+                },
+                "dateLoss": {
+                  "Day": 26,
+                  "Month": 4,
+                  "Year": 2016
+                },
+                "customer": "SPEEDBOLT",
+                "addendumNum": 2053599,
+                "claimNum": 6644552
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 18,
+                  "Month": 9,
+                  "Year": 2016
+                },
+                "status": "C",
+                "dateClaimOpened": {
+                  "Day": 12,
+                  "Month": 3,
+                  "Year": 2017
+                },
+                "dateLoss": {
+                  "Day": 18,
+                  "Month": 7,
+                  "Year": 2017
+                },
+                "customer": "RECRISYS",
+                "addendumNum": 2581290,
+                "claimNum": 6437232
+              },
+              {
+                "lastActivityDate": {
+                  "Day": 12,
+                  "Month": 7,
+                  "Year": 2016
+                },
+                "status": "V",
+                "dateClaimOpened": {
+                  "Day": 21,
+                  "Month": 11,
+                  "Year": 2017
+                },
+                "dateLoss": {
+                  "Day": 21,
+                  "Month": 5,
+                  "Year": 2016
+                },
+                "customer": "ZILLATIDE",
+                "addendumNum": 2724027,
+                "claimNum": 6786166
+              }
             ]
 
 + Response 500 (application/json)
