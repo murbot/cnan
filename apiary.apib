@@ -10,6 +10,8 @@ service.
 
 This document defines all the web services contracts related Gap Claim app.
 
+# Group Profiles
+
 ## User Profile [/profile/{profileId}]
 This service returns the user profile data. Se service is going to use the security token 
 the get the current user profile.
@@ -83,6 +85,8 @@ the control and make the agend acts as a dealer.
 + Response 500 (application/json)
 
     + Attributes (error)
+    
+# Group Claims
 
 ## Dealer Gap Claim [/claims/agent/{agentId}{?status}]
 Return the collection of gap claims of an specific dealer. If the status parameter is
