@@ -1,38 +1,39 @@
 FORMAT: 1A9
 HOST: http://api.cnanational.com/v1
 
-# Gap Claim Web Services API
+# Dealer Portal Web Services API
 
 GAP Claims have increased over time without any improvements to the systems and processes, 
 increasing call wait times as well as how long it takes to process a waiver. This prompted 
 a Business Process Review, identifying several changes to address issues impacting customer 
 service.
 
-This document defines all the web services contracts related Gap Claim app.
+This document defines all the web services contracts related to the Dealer Portal Application.
 
 ## Group Profiles
 
-### User Profile [/profile/{profileId}]
-This service returns the user profile data. The service is going to use the security token 
-the get the current user profile.
+### User Profile [/profile/{username}]
+This service returns the user profile data. The service is going to use the username
+to the get the current user profile.
 
-The main use for this service to identify the role of the current user on the first page. 
+The main use for this service is to identify the role of the current user on the first page. 
 If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
 the user to the gap claim list.
 
-If the ID of the current user does not match the requested profileId, then a 403 response
-will be returned, with a message indicating insufficient authorization.
+The username should not be sent directly from the UI, but should be sent from the CORS proxy in
+order to avoid client-side manipulation (tampering) of the username parameter.
 
 + Parameters
 
-    + profileId (required, number, `20575`) ... Profile ID.
+    + username (required, string, `jdoe`) ... Username of profile to retrieve.
 
 #### Retrieve a User Profile [GET]
 + Request (application/json)
 
     + Header
     
-            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            Current-User: jdoe
             Cache-Control: no-cache
 
 + Response 200 (application/json)
@@ -42,7 +43,7 @@ will be returned, with a message indicating insufficient authorization.
     + Body
     
             {
-                "id": 20575, 
+                "id": 22185,
                 "role": "dealer", 
                 "name": "Motor Inn Company"
             }
@@ -62,11 +63,11 @@ will be returned, with a message indicating insufficient authorization.
             }
 
 ### Dealer Profile [/agent/{agentId}/dealers]
-This service returns a collection of dealer profiles. Se service is going to use
-the security token the get the current user profile and identify if it is an agent.
-If the current user profile is a dealer, the service will return a 403 response code.
+This service returns a collection of dealer profiles. The service is going to use
+the Current-User header value to get the current user profile and identify if it is an agent.
+If the current user profile is not an agent the service will return a 403 response code.
 
-The main use for this service to fill the dropdown control of the first page. If the
+The main use for this service is to fill the dropdown control of the first (dealer list) page. If the
 current user is an agent, this service is going to provide us all the data to fill
 the control and make the agent acts as a dealer.
 
@@ -81,7 +82,9 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
 
     + Header
     
-            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            Current-User: jdoe
+            Cache-Control: no-cache
 
 + Response 200 (application/json)
 
@@ -160,29 +163,34 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
     
 ## Group Claims
 
-### Dealer Gap Claim [/dealers/{dealerId}/claims{?status}]
-Return the collection of gap claims for a specific dealer. If the status parameter is
-empty, the service is going to return an empty array.
+### Dealer Gap Claim [/dealers/{dealerId}/claims{?status}{?addendumNum}]
+Return the collection of gap claims for a specific dealer. If the status and addendum parameters
+are empty, the service is going to return a 400 (bad request) response code.
 
 The main use for this service is on the second page, to retive the collection of gap claim 
-for an specific dealer. The idea is to make 2 different request to this service. The first 
+for a specific dealer. The idea is to make 3 different request to this service. The first 
 one is to get all the gap claims with status "P". The second request is to get all the gap
 claims with status "O|A|B|C|D|V" ("C" and "D" status fall off after 90 days from this
-list).
+list).  The last request is to get a gap claim with a specified addendum number.
+
+The service only supports one search parameter at a time.  If both status and addendum number
+are provided, then addendum number will be used and status will be ignored.
 
 Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
 
 + Parameters
 
     + dealerId (required, number, `356`) ... Dealer ID of the gap claims to retrieve. 
-    + status (required, string, `P|B|A`) ... Claim status IDs of the gap claims to retrive, separated by pipe.
+    + status (optional, string, `P|B|A`) ... Claim status IDs of the gap claims to retrive, separated by pipe.
+    + addendumNum (optional, string `2245568`) ... Addendum number to search for.
 
 #### Retrieve a Dealer Gap Claim collection [GET]
 + Request (application/json)
 
     + Header
     
-            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            Current-User: jdoe
 
 + Response 200 (application/json)
 
@@ -423,8 +431,7 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
 ### Gap Claim [/claims/{claimId}]
 Return a single gap claim object with all the associated documents.
 
-The main use for this service is on the page where we have to show the deatils
-of an specific gap claim.
+The main use for this service is on the page where we have to show the details of a specific gap claim.
 
 + Parameters
 
@@ -435,7 +442,8 @@ of an specific gap claim.
 
     + Header
     
-            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            Current-User: jdoe
             
 + Response 200 (application/json)
 
@@ -472,7 +480,7 @@ of an specific gap claim.
 Return a collection of the different gap claim status types.
 
 The main use for this service to fill the legend on the page where we have
-to list all the gap claims for a dealer.
+to list all the gap claims for a dealer, as well as to populate the search by status field.
 
 
 #### Retrieve the Gap Claim Status collection [GET]
@@ -480,7 +488,8 @@ to list all the gap claims for a dealer.
 
     + Header
     
-            X-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            Current-User: jdoe
 
 + Response 200 (application/json)
 
@@ -491,11 +500,8 @@ to list all the gap claims for a dealer.
             [
                 {"id": "P", "name": "Pending Documents", "description": "Documents still needed in order to process the claim"},
                 {"id": "O", "name": "In Process", "description": "All documents received. Claim under Review"},
-                {"id": "A", "name": "In Process", "description": "All documents received. Claim under Review"},
                 {"id": "B", "name": "In Process", "description": "All documents received. Claim under Review"},
-                {"id": "C", "name": "Closed", "description": ""},
-                {"id": "D", "name": "Denied", "description": ""},
-                {"id": "V", "name": "Void", "description": ""}
+                {"id": "A", "name": "Approved", "description": "Claim has been processed and approved"}
             ]
 
 + Response 500 (application/json)
