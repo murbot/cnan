@@ -20,8 +20,9 @@ The main use for this service is to identify the role of the current user on the
 If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
 the user to the gap claim list.
 
-The username should not be sent directly from the UI, but should be sent from the CORS proxy in
-order to avoid client-side manipulation (tampering) of the username parameter.
+The CORS proxy will verify that the requested user profile is for the current (signed in) user, in
+order to avoid client-side manipulation (tampering) of the username parameter.  This will be achieved
+by using the header set by OAM/WebGate.
 
 + Parameters
 
