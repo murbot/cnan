@@ -12,21 +12,13 @@ This document defines all the web services contracts related to the Dealer Porta
 
 ## Group Profiles
 
-### User Profile [/profile/{username}]
-This service returns the user profile data. The service is going to use the username
-to the get the current user profile.
+### User Profile [/profile]
+This service returns the user profile data. The service is going to use the OAM/WebGate current user
+header to get the current user profile.
 
 The main use for this service is to identify the role of the current user on the first page. 
 If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
 the user to the gap claim list.
-
-The CORS proxy will verify that the requested user profile is for the current (signed in) user, in
-order to avoid client-side manipulation (tampering) of the username parameter.  This will be achieved
-by using the header set by OAM/WebGate.
-
-+ Parameters
-
-    + username (required, string, `jdoe`) ... Username of profile to retrieve.
 
 #### Retrieve a User Profile [GET]
 + Request (application/json)
@@ -164,7 +156,7 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
     
 ## Group Claims
 
-### Dealer Gap Claim [/dealers/{dealerId}/claims{?status}{?addendumNum}]
+### Dealer Gap Claim [/dealers/{dealerId}/claims{?status}{?addendumNum}{?claimNum}]
 Return the collection of gap claims for a specific dealer. If the status and addendum parameters
 are empty, the service is going to return a 400 (bad request) response code.
 
@@ -174,8 +166,8 @@ one is to get all the gap claims with status "P". The second request is to get a
 claims with status "O|A|B|C|D|V" ("C" and "D" status fall off after 90 days from this
 list).  The last request is to get a gap claim with a specified addendum number.
 
-The service only supports one search parameter at a time.  If both status and addendum number
-are provided, then addendum number will be used and status will be ignored.
+The service only supports one search parameter at a time.  If multiple parameters are provided they
+will be used in the following order (highest to lowest precedence): claim number, addendum number, status.
 
 Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
 
@@ -184,6 +176,7 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
     + dealerId (required, number, `356`) ... Dealer ID of the gap claims to retrieve. 
     + status (optional, string, `P|B|A`) ... Claim status IDs of the gap claims to retrive, separated by pipe.
     + addendumNum (optional, string `2245568`) ... Addendum number to search for.
+    + claimNum (optional, string `6030834`) ... Claim number to search for.
 
 #### Retrieve a Dealer Gap Claim collection [GET]
 + Request (application/json)
