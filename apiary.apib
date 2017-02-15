@@ -54,7 +54,7 @@ the user to the gap claim list.
 ### Dealer Profiles [/agents/{agentId}/dealers]
 This service returns a collection of dealer profiles. The service is going to use
 the *oam_remote_user* header value to get the current user profile and identify if it is an agent.
-If the current user profile is not an agent the service will return a 403 response code.
+If the current user profile is not an agent the service will return a `403` response code.
 
 The main use for this service is to fill the dropdown control of the first (dealer list) page. If the
 current user is an agent, this service is going to provide us all the data to fill
@@ -137,24 +137,27 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
     
 ## Group Claims
 
-### Dealer Gap Claim [/dealers/{dealerId}/claims{?product}{?status}{?contractNum}{?claimNum}{?sort}]
+### Dealer Gap Claim [/dealers/{dealerId}/claims{?product}{?status}{?contractNum}{?claimNum}{?sort}{?page}{?size}]
 Return the collection of gap claims for a specific dealer.  The main use for this service 
 is on the second page, to retive the collection of gap claims for a specific dealer.  
 The idea is to make 2 different request to this service. The first 
-one is to get all the gap claims with status "P". The second request is to get all the gap
-claims with status "O|A|B|C|D" ("C" and "D" status fall off after 90 days from this
+one is to get all the gap claims with status `P`. The second request is to get all the gap
+claims with status `O|A|B|C|D` (`C` and `D` status fall off after 90 days from this
 list), or with a specific claim or contract number.
 
 The product parameter must be specified, as well as one of status, contractNum or claimNum.
-If these conditions are not met, a 400 response code will be returned.  If multiple parameters 
+If these conditions are not met, a `400` response code will be returned.  If multiple parameters 
 (e.g. status and contractNum) are provided they will be used in the following order 
-(highest to lowest precedence): claimNum, contractNum, status.  For the purposes of the
-Dealer Portal UI, the product value will always be GAP.
+(highest to lowest precedence): `claimNum`, `contractNum`, `status`.  For the purposes of the
+Dealer Portal UI, the `product` value will always be `GAP`.
 
 Sorting can be specified by the optional sort parameter.  Multiple sort criteria can be specified
 by simply providing the parameter multiple times; for example:
 
 `?sort=lastActivityDate,desc&sort=customerLastName,desc`
+
+Pagination may be specified by using the `page` and `size` parameters.  If only `page` is specified,
+a default page size of `20` will be assumed.  If only `size` is specfied, a default page of `0` will be assumed.
 
 Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
 
@@ -166,6 +169,8 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
     + claimNum (optional, string `6030834`) ... Claim number to search for.
     + product (required, string `GAP`) ... The type of product to search for.
     + sort (optional, string `lastActivityDate,desc`) ... The sorting criteria to be applied.
+    + page (optional, number, `2`) ... Page to retrieve for pagination.
+    + size (optional, number, `20`) ... Page size for pagination.
     
 #### Retrieve a Dealer Gap Claim collection [GET]
 + Request (application/json)
