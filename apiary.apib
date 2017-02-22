@@ -10,6 +10,10 @@ service.
 
 This document defines all the web services contracts related to the Dealer Portal Application.
 
+Note that the `Correlation-Id` request header is a UUID string that must be generated and sent
+from the requestor (web service client).  This string is used to trace requests through each
+related web service for a single request.
+
 ## Group Profiles
 
 ### User Profile [/profile]
