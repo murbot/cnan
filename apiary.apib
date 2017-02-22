@@ -20,6 +20,8 @@ The main use for this service is to identify the role(s) of the current user on 
 If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
 the user to the gap claim list.
 
+The `partyType` field should be used to determine what the user type is.  
+
 #### Retrieve a User Profile [GET]
 + Request (application/json)
 
@@ -37,9 +39,10 @@ the user to the gap claim list.
     + Body
     
             {
-                "id": 22185,
-                "web_role": "webRole",
-                "user_roles": [ "userRoleX", "userRoleY" ]
+                "id": "web_jdoe,
+                "webRole": "WEB_DEALER",
+                "userRoles": [ "IS Development", "Java Developer" ]
+                "partyType": "D",
                 "name": "Motor Inn Company"
             }
             
@@ -53,7 +56,7 @@ the user to the gap claim list.
 
 ### Dealer Profiles [/agents/{agentId}/dealers]
 This service returns a collection of dealer profiles. The service is going to use
-the *oam_remote_user* header value to get the current user profile and identify if it is an agent.
+the `oam_remote_user` header value to get the current user profile and identify if it is an agent.
 If the current user profile is not an agent the service will return a `403` response code.
 
 The main use for this service is to fill the dropdown control of the first (dealer list) page. If the
@@ -527,9 +530,10 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 + day (number) - Day of the date
 
 ## userProfile (object)
-+ id: 365 (number, required) - Profile Id
-+ web_role (string, optional) - Web role
-+ user_roles (array[string], optional) - User roles
++ id: web_jdoe (string, required) - Profile Id/username
++ webRole (string, optional) - Web role
++ userRoles (array[string], optional) - User roles
++ partyType (string, required) - Party type
 + name: Motor Inn Company (string, required) - Profile name
 
 ## dealer (object)
