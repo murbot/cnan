@@ -14,6 +14,9 @@ Note that the `Correlation-Id` request header is a UUID string that must be gene
 from the requestor (web service client).  This string is used to trace requests through each
 related web service for a single request.
 
+The `REQUESTOR_APP` header is also used for logging and tracing purposes, and identifies the
+application that made the original request.
+
 ## Group Profiles
 
 ### User Profile [/profile]
@@ -24,7 +27,9 @@ The main use for this service is to identify the role(s) of the current user on 
 If the user is a dealer, we are going to skip this fisrt page and we are going to redirect
 the user to the gap claim list.
 
-The `partyType` field should be used to determine what the user type is.  
+The `partyType` field should be used to determine what the user type is.  The `partyId` field
+represents the current dealer or agent ID, and should be used when making requests to services
+such as the Dealer Profiles service (/agents/{agentId}/dealers) below.
 
 #### Retrieve a User Profile [GET]
 + Request (application/json)
@@ -34,6 +39,7 @@ The `partyType` field should be used to determine what the user type is.
             Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
             oam_remote_user: jdoe
             Correlation-Id: 1434383293
+            REQUESTOR_APP: Dealer Portal
             Cache-Control: no-cache
 
 + Response 200 (application/json)
@@ -46,8 +52,35 @@ The `partyType` field should be used to determine what the user type is.
                 "id": "web_jdoe,
                 "webRole": "WEB_DEALER",
                 "userRoles": [ "IS Development", "Java Developer" ]
+                "partyId": 235,
                 "partyType": "D",
-                "name": "Motor Inn Company"
+                "name": "Motor Inn Company",
+                "links": {
+                    "web_jdoe": [
+                        {
+                            "id": "198229",
+                            "location": "A2",
+                            "linkType": "A",
+                            "label": "Web Dealer Lists Form",
+                            "icon": "other.png",
+                            "sortOrder": 100,
+                            "status": "A",
+                            "locUrl": null,
+                            "appUrl": "*DealerList/faces/Login"
+                        },
+                        {
+                            "id": "22941375",
+                            "location": "A2",
+                            "linkType": "R",
+                            "label": "Dealership Statement",
+                            "icon": "other.png",
+                            "sortOrder": 600,
+                            "status": "A",
+                            "locUrl": null,
+                            "appUrl": null
+                        }
+                    ]
+                }
             }
             
 + Response 500 (application/json)
@@ -81,6 +114,7 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/EJ5QkB7vG
             Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
             oam_remote_user: jdoe
             Correlation-Id: 1434383293
+            REQUESTOR_APP: Dealer Portal
             Cache-Control: no-cache
 
 + Response 200 (application/json)
@@ -187,6 +221,7 @@ Here is the JSON dummy data generator: http://beta.json-generator.com/NJStEVQwz
             Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
             oam_remote_user: jdoe
             Correlation-Id: 1434383293
+            REQUESTOR_APP: Dealer Portal
 
 + Response 200 (application/json)
 
@@ -455,6 +490,7 @@ The main use for this service is on the page where we have to show the details o
             Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
             oam_remote_user: jdoe
             Correlation-Id: 1434383293
+            REQUESTOR_APP: Dealer Portal
             
 + Response 200 (application/json)
 
@@ -505,6 +541,7 @@ to list all the gap claims for a dealer, as well as to populate the search by st
             Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
             oam_remote_user: jdoe
             Correlation-Id: 1434383293
+            REQUESTOR_APP: Dealer Portal
 
 + Response 200 (application/json)
 
@@ -537,8 +574,24 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 + id: web_jdoe (string, required) - Profile Id/username
 + webRole (string, optional) - Web role
 + userRoles (array[string], optional) - User roles
++ partyId (number, required) - Party id
 + partyType (string, required) - Party type
 + name: Motor Inn Company (string, required) - Profile name
++ links (links, optional) - Links for the user
+
+## links (object)
++ username: web_jdoe (array[link]) - Array of links for the user
+
+## link (object)
++ id: 198229 (number, required) - Link Id
++ location: A2 (string, required) - Location the link should be shown
++ linkType: A (string, required) - The type of link (A=application or R=report)
++ label: Web Dealer Lists Form (string, required) - The label for the link
++ icon: other.png (string, required) - The icon for the link
++ sortOrder: 100 (number, required) - The order which the link should be presented
++ status: A (string, required) - The status of the link (always A=active)
++ locUrl (string, optional) - Uknown
++ appUrl (string, optional) - The URL for an applicaton link
 
 ## dealer (object)
 + id: 365 (number, required) - Dealer Id
