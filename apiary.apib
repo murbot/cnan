@@ -549,14 +549,16 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 
     + Body
     
-            [
-                {"id": "P", "name": "Pending Documents", "description": "Documents still needed in order to process the claim"},
-                {"id": "O", "name": "In Process", "description": "All documents received. Claim under Review"},
-                {"id": "A", "name": "In Process", "description": "All documents received. Claim under Review"},
-                {"id": "B", "name": "In Process", "description": "All documents received. Claim under Review"},
-                {"id": "C", "name": "Closed", "description": ""},
-                {"id": "D", "name": "Denied", "description": ""}
-            ]
+            {
+                "claimStatuses": [
+                    {"id": "P", "name": "Pending Documents", "description": "Documents still needed in order to process the claim"},
+                    {"id": "O", "name": "In Process", "description": "All documents received. Claim under Review"},
+                    {"id": "A", "name": "In Process", "description": "All documents received. Claim under Review"},
+                    {"id": "B", "name": "In Process", "description": "All documents received. Claim under Review"},
+                    {"id": "C", "name": "Closed", "description": ""},
+                    {"id": "D", "name": "Denied", "description": ""}
+                ]
+            }
 
 + Response 500 (application/json)
 
