@@ -510,14 +510,14 @@ The main use for this service is on the page where we have to show the details o
                     "lastActivityDate": {"Year": 2016, "Month": 1, "Day": 15}
                 },
                 "requiredDocs": [
-                    {"id": 1, "name": "Police Report", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}},
-                    {"id": 2, "name": "Lender Payment History", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 16}},
-                    {"id": 3, "name": "Finance Contract", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 17}}
+                    {"id": 1, "name": "Police Report", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}, "status": "Verified"},
+                    {"id": 2, "name": "Lender Payment History", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 16}, "status": "Verified"},
+                    {"id": 3, "name": "Finance Contract", "verifiedDate": null, "status": "Pending"}
                 ],
                 "additionalDocs": [
-                    {"id": 4, "name": "Sales/Leasing Aggrement", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}},
-                    {"id": 5, "name": "Factory Invoice", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 16}},
-                    {"id": 6, "name": "Other Credits", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 17}}
+                    {"id": 4, "name": "Sales/Leasing Aggrement", "verifiedDate": {"Year": 2016, "Month": 1, "Day": 15}, "status": "Verified"},
+                    {"id": 5, "name": "Factory Invoice", "verifiedDate": null, "status": "Pending"},
+                    {"id": 6, "name": "Other Credits", "verifiedDate": null, "status": "Pending"}
                 ]
             }
 
@@ -606,6 +606,7 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 + id (number) - Document ID
 + name (string) - Document name
 + verifiedDate (date) - Document verification date
++ status: Pending (string) - Document status
 
 ## documents (object)
 + documents (array[document]) - Array of documents
