@@ -500,8 +500,8 @@ The main use for this service is on the page where we have to show the details o
     
             {
                 "claimData": {
-                    "claimNum": "6359654", 
-                    "contractNum": "2245568",
+                    "claimNum": 6359654, 
+                    "contractNum": 2245568,
                     "customerLastName": "Smith",
                     "dateLoss": {"Year": 2016, "Month": 1, "Day": 10},
                     "dateClaimOpened": {"Year": 2016, "Month": 1, "Day": 15},
@@ -585,7 +585,7 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 + username: web_jdoe (array[link]) - Array of links for the user
 
 ## link (object)
-+ id: 198229 (number, required) - Link Id
++ id: 198229 (string, required) - Link Id
 + location: A2 (string, required) - Location the link should be shown
 + linkType: A (string, required) - The type of link (A=application or R=report)
 + label: Web Dealer Lists Form (string, required) - The label for the link
@@ -620,8 +620,8 @@ to list all the gap claims for a dealer, as well as to populate the search by st
 + claimStatuses (array[claimStatus]) - Array of claim statuses
 
 ## claim (object)
-+ claimNum: 6359654 (string) - Claim number
-+ contractNum: 2245568 (string) - Contract (aka addendum) number
++ claimNum: 6359654 (number) - Claim number
++ contractNum: 2245568 (number) - Contract (aka addendum) number
 + customerLastName: Smith (string) - Customer
 + dateLoss (date) - Date of loss
 + dateClaimOpened (date) - Date claim opened
